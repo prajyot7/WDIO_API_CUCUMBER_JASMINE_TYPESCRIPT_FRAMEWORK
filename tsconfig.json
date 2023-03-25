@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "resolveJsonModule":true,    
+    "esModuleInterop": true,
+    "types": [
+      "node",
+      "@wdio/globals/types",
+      "@wdio/globals",
+      "expect-webdriverio",
+      "@wdio/jasmine-framework",
+      "jasmine",
+      "@wdio/devtools-service",
+      "@wdio/cucumber-framework"
+    ],
+    "target": "es2022",
+    "skipLibCheck": true,
+    "outDir": ".",
+  },
+  "include": [
+    "./test/**/*.e2e.ts",
+    "./test/**/*.ts",
+    "./test/jas_e2e/smoke.e2e.ts",
+    "./*.ts",
+    "./**/*.ts",
+    "./wdio.conf.ts",
+    "./wdio.conf.ts",
+    "./test/jas_e2e/*.e2e.ts",
+    "./test/api_e2e/*.e2e.ts",
+    "./wdio.conf.e2e.ts",
+    "./wdio.conf.e2e.ts",
+    "./test/cucumber/feature/**/*.feature",
+    "./test/cucumber/**/**/*.ts",
+    "./test/**/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "./test/**/**/*.js",
+  ]
+}
