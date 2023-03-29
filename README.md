@@ -3,7 +3,6 @@
 #### Requirements
 [![NodeJs](https://img.shields.io/badge/-NodeJS%20v12%20OR%20later-%23339933?logo=npm)](https://nodejs.org/en/download/)
 [![Java](https://img.shields.io/badge/-JDK-%23007396?logo=java&logoColor=black&)](https://www.oracle.com/java/technologies/downloads/)
-[![Docker](https://img.shields.io/badge/-Docker-0db7ed?logo=docker&logoColor=white)](https://docs.docker.com/engine/install/)
 [![VSCode](https://img.shields.io/badge/-Visual%20Studio%20Code-%233178C6?logo=visual-studio-code)](https://code.visualstudio.com/download)
 
 #### Clone Repository
@@ -41,32 +40,18 @@ npm run wdio:test             [ Jasmine tests ]
 npm run wdio_cuc_su:run     [ Cucumber BDD tests ]
 ```
 
-Run test in Docker:
-```bash
-npm run test:docker       [ Jasmine tests]
-npm run wdio_cuc_su:run:docker   [ Cucumber BDD tests ]
-```
-> Pre and Post script will handle start and stop of docker containers automatically.
-> If containers does not stop automatically run "docker-compose down" command.
-
 Generate Report:
 ```bash
-npm run report:Jasmine
-npm run report:cucumber
+For Both Jasmine and Cucumber use one Report generate
+npm run allure:generate 
 ```
 
-Report Paths:
+Open Report :
 ```bash
-Jasmine: web/Jasminewesome-report/Jasminewesome-report.html
-cucumber: web/reports/cucumber/cucumber-report.html
+For Both Jasmine and Cucumber use one Report Open
+npm run allure:open 
 ```
 
-Send Report:
-> Update .env file details with reference of .env.example file
-```bash
-npm run mailCucumberReport
-npm run mailJasmineResult
-```
 -----
 
 ### API Test
@@ -81,9 +66,16 @@ Run test:
 npm run wdio:test
 ```
 
-Report Paths:
+Generate Report:
 ```bash
-api/reports/Jasminewesome.html
+For Both Jasmine and Cucumber use one Report generate
+npm run allure:generate 
+```
+
+Open Report :
+```bash
+For Both Jasmine and Cucumber use one Report Open
+npm run allure:open 
 ```
 
 -----
@@ -107,11 +99,7 @@ api/reports/Jasminewesome.html
 [![TypeScript](https://img.shields.io/badge/-TypeScript-%233178C6?logo=Typescript&logoColor=black)](https://www.typescriptlang.org/)
 [![Jasmine](https://img.shields.io/badge/-Jasmine-%238D6748?logo=Jasmine&logoColor=white)](https://Jasminejs.org/)
 [![CucumberIO](https://img.shields.io/badge/-Cucumber.io-brightgreen?logo=cucumber&logoColor=white)](https://cucumber.io/)
-[![ChaiJS](https://img.shields.io/badge/-ChaiJS-FEDABD?logo=Chai&logoColor=black)](https://www.chaijs.com/)
-[![SuperTest](https://img.shields.io/badge/-SuperTest-07BA82?logoColor=white)](https://github.com/visionmedia/supertest)
 [![Enquirer](https://img.shields.io/badge/-Enquirer-f0db4f?logoColor=white)](https://github.com/enquirer/enquirer)
-[![Docker](https://img.shields.io/badge/-Docker-0db7ed?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Node-Mailer](https://img.shields.io/badge/-Node%20Mailer-89D05C?logo=gmail&logoColor=blue)](https://github.com/nodemailer/nodemailer)
 
 #### Folder Structure:
 ![e2e_framework_folders](https://user-images.githubusercontent.com/65847528/168474570-5eca8112-25b7-45ca-b411-355d0ce39079.png)

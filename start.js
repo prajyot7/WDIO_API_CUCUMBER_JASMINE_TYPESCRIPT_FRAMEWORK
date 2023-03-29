@@ -12,7 +12,7 @@ const TEST_MODULE = new Select({
 const RUNNER_SERVICE = new Select({
     name: 'runmode',
     message: 'Where do you want to run your tests?',
-    choices: ['Local', 'Docker']
+    choices: ['Local']
 })
 
 const UI_TEST_TYPE = new Select({
@@ -24,13 +24,7 @@ const UI_TEST_TYPE = new Select({
 let runnerCommand = {
     apiRunner: () => { execSync('cd api && npm run wdio:test', { stdio: 'inherit' }) },
     localJasmineRunner: () => execSync('cd web && npm run wdio:test', { stdio: 'inherit' }),
-    dockerJasmineRunner: () => {
-        execSync('cd web && npm run test:docker', { stdio: 'inherit' })
-    },
     localBDDRunner: () => execSync('cd web && npm run wdio_cuc_su:run', { stdio: 'inherit' }),
-    dockerBDDRunner: () => {
-        execSync('cd web && npm run test:e2e:docker', { stdio: 'inherit' })
-    }
 }
 
 const API_NODE_MODULES_PATH = join(process.cwd(), 'api', 'node_modules');
@@ -73,12 +67,10 @@ const configRunner = async () => {
             if (ui_test_type == 'Jasmine') {
                 let Jasmine_runmode = await RUNNER_SERVICE.run();
                 if (Jasmine_runmode == 'Local') { runnerCommand.localJasmineRunner() }
-                else if (Jasmine_runmode == 'Docker') { runnerCommand.dockerJasmineRunner() }
             }
             else if (ui_test_type == 'Cucumber') {
                 let bdd_runmode = await RUNNER_SERVICE.run();
                 if (bdd_runmode == 'Local') { runnerCommand.localBDDRunner() }
-                else if (bdd_runmode == 'Docker') { runnerCommand.dockerBDDRunner() }
             }
             break;
         default: throw new Error("Please select option from ::  api | jasmine | cucumber")
