@@ -1,7 +1,7 @@
 var path = require('path');
 import type { Options } from '@wdio/types';
 import { browser } from '@wdio/globals';
-export const config: Options.Testrunner= {
+export const config: WebdriverIO.Config = {
     runner: 'local',
     autoCompileOpts: {
         autoCompile: true,
@@ -12,7 +12,7 @@ export const config: Options.Testrunner= {
     },
 
     specs: [
-        './test/**/*.spec.ts'       
+        './**/*.spec.ts'       
     ],
     capabilities: [{
 

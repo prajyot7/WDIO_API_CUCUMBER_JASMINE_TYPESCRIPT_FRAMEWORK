@@ -19,24 +19,24 @@
     "skipLibCheck": true,
     "outDir": ".",
   },
+
   "include": [
-    "./test/**/*.e2e.ts",
-    "./test/**/*.ts",
-    "./test/jas_e2e/smoke.e2e.ts",
+    "./**/*.e2e.ts",
+    "./**/*.ts",
+    "./jas_e2e/smoke.e2e.ts",
     "./*.ts",
     "./**/*.ts",
     "./wdio.conf.ts",
     "./wdio.conf.ts",
-    "./test/jas_e2e/*.e2e.ts",
-    "./test/api_e2e/*.e2e.ts",
+    "./jas_e2e/*.e2e.ts",
     "./wdio.conf.e2e.ts",
     "./wdio.conf.e2e.ts",
-    "./test/cucumber/feature/**/*.feature",
-    "./test/cucumber/**/**/*.ts",
-    "./test/**/**/*.ts",
+    "./cucumber/feature/**/*.feature",
+    "./cucumber/**/**/*.ts",
+    "./**/**/*.ts",
   ],
   "exclude": [
     "node_modules",
-    "./test/**/**/*.js",
+    "./**/**/*.js",
   ]
 }

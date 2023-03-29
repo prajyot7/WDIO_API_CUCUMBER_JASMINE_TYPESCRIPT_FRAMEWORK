@@ -1,13 +1,10 @@
-import type { Options } from '@wdio/types'
 import { setValue } from '@wdio/shared-store-service';
-import { browser } from '@wdio/globals';
-import { LoginPage} from './test/page-objects/login.page'
-import { herokuappLoginData } from'./test/resources/logindata';
-import { deleteDirectory } from './test/utils/fileutils';
-import { JASMINE_OUTPUT_DIR } from './test/static/pathConstants';
+import { browser} from '@wdio/globals';
+import type { Options } from '@wdio/types'
+import FrameworkConstants from './static/FrameworkConstants';
 var path = require('path');
-export const config: Options.Testrunner= {
-    // 
+export const config: WebdriverIO.Config = {
+    //
     // ====================
     // Runner Configuration
     // ====================
@@ -20,8 +17,8 @@ export const config: Options.Testrunner= {
             project: './tsconfig.json'
         }
     },
-
-
+    
+    
     //
     // ==================
     // Specify Test Files
@@ -39,17 +36,17 @@ export const config: Options.Testrunner= {
     // will be called from there.
     //
     specs: [
-        './test/jas_e2e/smoke.e2e.ts',
-
-        // './test/**/*.ts'
+        './cucumber/features/**/*.feature'
     ],
+    //Excluding register page as website is absolute
+    exclude: [],
+    // exclude: ['./cucumber/features/**/register.feature'],
+    suites: {
+        smoke: ['./cucumber/features/smoke/*.feature'],
+        regression: ['./cucumber/features/regression/*.feature']
+    },
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
-    // suites: {
-    //     smoke: ['./test/jas_e2e/smoke.spec.ts']
-    // },
+   
     //
     // ============
     // Capabilities
@@ -67,26 +64,37 @@ export const config: Options.Testrunner= {
     // from the same test should run tests.
     //
     maxInstances: 1,
-    // capabilities: chromeCapabilities,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 1,
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    // capabilities: [{
+    
+    //     // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+    //     // grid with only 5 firefox instances available you can make sure that not more than
+    //     // 5 instances get started at a time.
+    //     maxInstances: 1,
+    //     //
+    //     browserName: 'chrome',
+    //     acceptInsecureCerts: true
+    //     // If outputDir is provided WebdriverIO can capture driver session logs
+    //     // it is possible to configure which logTypes to include/exclude.
+    //     // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+    //     // excludeDriverLogs: ['bugreport', 'server'],
+    // }],
+    capabilities: [
+        {
+            maxInstances: 1,
+            browserName: 'chrome',
+            acceptInsecureCerts: true,
+            "goog:chromeOptions": {
+                "prefs": {
+                    "download.default_directory": FrameworkConstants.DOWNLOAD_FOLDER_PATH
+                }
+            }
+        }
+    ],
     //
     // ===================
     // Test Configurations
@@ -95,7 +103,6 @@ export const config: Options.Testrunner= {
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'error',
-    outputDir:path.join('.','/logs'),
     //
     // Set specific log levels per logger
     // loggers:
@@ -122,7 +129,7 @@ export const config: Options.Testrunner= {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 120000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -136,17 +143,17 @@ export const config: Options.Testrunner= {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['chromedriver', 'shared-store', 'devtools'],
-
+    
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'jasmine',
+    framework: 'cucumber',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
     // specFileRetriesDelay: 0,
@@ -157,7 +164,6 @@ export const config: Options.Testrunner= {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    // reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
     reporters: [
         'spec',
         [
@@ -165,29 +171,39 @@ export const config: Options.Testrunner= {
             {
                 outputDir: 'logs/results/allure-results',
                 disableWebdriverStepsReporting: true,
-                disableWebdriverScreenshotsReporting: false
+                disableWebdriverScreenshotsReporting: false,
+                useCucumberStepReporter: true
             }
         ]
     ],
 
 
-
     //
-    // Options to be passed to Jasmine.
-    jasmineOpts: {
-        // Jasmine default timeout
-        defaultTimeoutInterval: 6000000,
-        allScriptsTimeout: 6000000,
-        getPageTimeout: 6000000,
-        //
-        // The Jasmine framework allows interception of each assertion in order to log the state of the application
-        // or website depending on the result. For example, it is pretty handy to take a screenshot every time
-        // an assertion fails.
-        expectationResultHandler: function (passed, assertion) {
-            // do something
-        }
+    // If you are using Cucumber you need to specify the location of your step definitions.
+    cucumberOpts: {
+        // <string[]> (file/dir) require files before executing features
+        require: ['./cucumber/step-definitions/*.ts'],
+        // <boolean> show full backtrace for errors
+        backtrace: false,
+        // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+       // <boolean> invoke formatters without executing steps
+        dryRun: false,
+        // <boolean> abort the run on first failure
+        failFast: false,
+        // <boolean> hide step definition snippets for pending steps
+        snippets: true,
+        // <boolean> hide source uris
+        source: true,
+        // <boolean> fail if there are any undefined or pending steps
+        strict: false,
+        // <string> (expression) only execute the features or scenarios with tags matching the expression
+        tagExpression: '',
+        // <number> timeout for step definitions
+        timeout: 60000,
+        // <boolean> Enable this config to treat undefined definitions as warnings.
+        ignoreUndefinedDefinitions: false
     },
-
+    
     //
     // =====
     // Hooks
@@ -250,51 +266,65 @@ export const config: Options.Testrunner= {
     // beforeCommand: function (commandName, args) {
     // },
     /**
-     * Hook that gets executed before the suite starts
-     * @param {Object} suite suite details
+     * Cucumber Hooks
+     *
+     * Runs before a Cucumber Feature.
+     * @param {String}                   uri      path to feature file
+     * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // beforeSuite: function (suite) {
+    // beforeFeature: function (uri, feature) {
     // },
     /**
-     * Function to be executed before a test (in Mocha/Jasmine) starts.
+     *
+     * Runs before a Cucumber Scenario.
+     * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
+     * @param {Object}                 context  Cucumber World object
      */
-    // beforeTest: function (test, context) {
+    // beforeScenario: function (world, context) {
     // },
     /**
-     * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
-     * beforeEach in Mocha)
+     *
+     * Runs before a Cucumber Step.
+     * @param {Pickle.IPickleStep} step     step data
+     * @param {IPickle}            scenario scenario pickle
+     * @param {Object}             context  Cucumber World object
      */
-    // beforeHook: function (test, context) {
+    // beforeStep: function (step, scenario, context) {
     // },
     /**
-     * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
-     * afterEach in Mocha)
+     *
+     * Runs after a Cucumber Step.
+     * @param {Pickle.IPickleStep} step             step data
+     * @param {IPickle}            scenario         scenario pickle
+     * @param {Object}             result           results object containing scenario results
+     * @param {boolean}            result.passed    true if scenario has passed
+     * @param {string}             result.error     error stack if scenario failed
+     * @param {number}             result.duration  duration of scenario in milliseconds
+     * @param {Object}             context          Cucumber World object
      */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+    // afterStep: function (step, scenario, result, context) {
     // },
     /**
-     * Function to be executed after a test (in Mocha/Jasmine only)
-     * @param {Object}  test             test object
-     * @param {Object}  context          scope object the test was executed with
-     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-     * @param {Any}     result.result    return object of test function
-     * @param {Number}  result.duration  duration of test
-     * @param {Boolean} result.passed    true if test has passed, otherwise false
-     * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+     *
+     * Runs after a Cucumber Scenario.
+     * @param {ITestCaseHookParameter} world            world object containing information on pickle and test step
+     * @param {Object}                 result           results object containing scenario results
+     * @param {boolean}                result.passed    true if scenario has passed
+     * @param {string}                 result.error     error stack if scenario failed
+     * @param {number}                 result.duration  duration of scenario in milliseconds
+     * @param {Object}                 context          Cucumber World object
      */
-    // afterTest: async function(test, context, { error, result, duration, passed, retries }) {
-    //     if (!passed) {
-    //         await browser.takeScreenshot();
-    //     }
+    // afterScenario: function (world, result, context) {
     // },
-
-
     /**
-     * Hook that gets executed after the suite has ended
-     * @param {Object} suite suite details
+     *
+     * Runs after a Cucumber Feature.
+     * @param {String}                   uri      path to feature file
+     * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // afterSuite: function (suite) {
+    // afterFeature: function (uri, feature) {
     // },
+    
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {String} commandName hook command name
@@ -351,10 +381,10 @@ export const config: Options.Testrunner= {
         await setValue('browserWaitTimeout', browserWaitTimeout)
         await setValue('dialogWaitTimeout', dialogWaitTimeout)
         await setValue('defautDebounceTimeout', defautDebounceTimeout)
-        await browser.maximizeWindow();
+        // await browser.maximizeWindow();
         // enableThrottling(true);
-        let loginPage = new LoginPage();
-        await loginPage.login(herokuappLoginData.validUserName, herokuappLoginData.validPassword())
+        // let loginPage = new LoginPage();
+        // await loginPage.login(herokuappLoginData.validUserName, herokuappLoginData.validPassword())
         
-    }
+    }    
 }
