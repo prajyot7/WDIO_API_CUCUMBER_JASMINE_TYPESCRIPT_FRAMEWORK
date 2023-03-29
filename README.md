@@ -1,12 +1,5 @@
 <h2 align="center"> Web and API Test Automation Framework </h2>
 
-<h4 align="center">
-[![WEB CI](https://github.com/prajyot7/WDIO_API_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK/actions/workflows/web.yml/badge.svg)](https://github.com/prajyot7/WDIO_API_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK/actions/workflows/web.yml)
-
-[![API CI](https://github.com/prajyot7/WDIO_API_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK/actions/workflows/api.yml/badge.svg)](https://github.com/prajyot7/WDIO_API_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK/actions/workflows/api.yml)
-
-</h4>
-
 #### Requirements
 [![NodeJs](https://img.shields.io/badge/-NodeJS%20v12%20OR%20later-%23339933?logo=npm)](https://nodejs.org/en/download/)
 [![Java](https://img.shields.io/badge/-JDK-%23007396?logo=java&logoColor=black&)](https://www.oracle.com/java/technologies/downloads/)
