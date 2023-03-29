@@ -14,7 +14,6 @@
 -----
 
 ### Interactive CLI to run test:
-> Make sure mobile setup has been completed if selecting mobile as CLI option. See [Mobile Test](#Mobile-Test) for setup instructions. Before running actual test, presence of node_modules folder will be validated and if not not found installation will take place before proceeding any furthur.
 ```bash
 npm start
 ```
