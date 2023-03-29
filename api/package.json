@@ -10,7 +10,7 @@
     "tsc": "tsc",
     "clean": "clean",
     "clean:test": "node ./node_modules/glup/bin/glup cleanTest",
-    "wdio:test": " npm run pretest && npm run wdio_api:run && npm run allure:generate && npm run allure:open",
+    "wdio:test": " npm run pretest && npm run wdio_api:run",
     "wdio:test_with_params": " npm run pretest && npm run wido_with_params",
     "wdio_api:run": "wdio run ./wdio.conf.api.ts",
     "wdio_api_su:run": "npm run pretest && npm run wdio_api:run"

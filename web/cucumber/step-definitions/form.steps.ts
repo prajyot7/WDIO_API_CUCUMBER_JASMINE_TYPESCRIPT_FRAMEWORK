@@ -3,9 +3,8 @@ import formdata from "../../resources/formdata.json"
 import FrameworkConstants from "../../static/FrameworkConstants";
 import CommonActions from "../../utils/common.actions";
 import { FormPage } from "../../page-objects/form.page";
-import { FileUtils } from "../../utils/fileutils";
+import { FileUtils, parseJsonFile } from "../../utils/fileutils";
 let  formPage =new FormPage()
-let fileUtils = new FileUtils();
 Given("I am on form page {string}", async(pageurl:string)=> {
     await browser.url(pageurl);
     await CommonActions.addLog(`Loading URL: ${pageurl}`)
@@ -21,7 +20,7 @@ When("I enter all mandate fields", async()=> {
 })
 
 When(/^I enter all mandate fields from (.+)$/, async(file:string)=> {
-    let testdata = await fileUtils.parseJsonFile(FrameworkConstants.RESOURCE_FOLDER_PATH+file);
+    let testdata = await parseJsonFile(FrameworkConstants.RESOURCE_FOLDER_PATH+file);
     await formPage.setnames(testdata.firstname, testdata.lastname);
     await formPage.setEmail(testdata.email)
     await formPage.setMobileNumber(testdata.mobileno)
