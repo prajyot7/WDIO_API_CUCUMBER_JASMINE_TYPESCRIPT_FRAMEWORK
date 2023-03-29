@@ -29,12 +29,6 @@ Install dependencies:
 npm install --legacy-peer-deps
 ```
 
-Setup .env file:<br>
-create `.env` file inside web folder and update content with reference to `.env.example`
-
-Run test in local:
-> By default test will run in HEADLESS mode.
-> Update MODE=LOCAL in .env file to see test running in browser.
 ```bash
 npm run wdio:test             [ Jasmine tests ]
 npm run wdio_cuc_su:run     [ Cucumber BDD tests ]
@@ -84,13 +78,11 @@ npm run allure:open
     - Web and API Testing
     - Jasmine and Cucumber BDD framework
     - Page Object Design pattern
-    - Docker with VNC integration
     - Parallel execution
     - Cross browser testing
     - Retry failed test
     - Screenshot in report for failed tests
     - Github actions
-    - Send test report to list of Gmail
     - Use of types for method params optimization
     - Improved import statement using tsconfig path
 
