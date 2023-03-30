@@ -18,7 +18,7 @@ npm start
 ```
 It start wizard with test module options, based on user selection either of the below module will start <b>locally</b> or inside <b>docker container</b>. Code to control wizard and user selection is available in 'start.js' which is built using [enquirer](https://www.npmjs.com/package/enquirer) node package.<br>
 <b>Test Module Options : </b> | UI | API | <br>
-![cli_demo]( )
+![cli_demo](https://user-images.githubusercontent.com/25434538/228750961-11c2c2ac-37ae-40bb-b68c-3ffd572bea61.gif)
 
 
 -----
