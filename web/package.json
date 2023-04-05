@@ -1,5 +1,5 @@
 {
-  "name": "WDIO_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK",
+  "name": "WDIO_API_CUCUMBER_JASMINE_TYPESCRIPT_FRAMEWORK",
   "version": "1.0.0",
   "description": "WebdriverIO Cucumber Jasmine Typescript Framework",
   "main": "index.js",
