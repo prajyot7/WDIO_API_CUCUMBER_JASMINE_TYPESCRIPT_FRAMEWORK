@@ -1,6 +1,6 @@
-import { LoginPage } from "../page-objects/login.page";
-import FrameworkConstants from '../static/FrameworkConstants';
-import { herokuappLoginData } from '../resources/logindata';
+import { LoginPage } from "../../page-objects/login.page";
+import FrameworkConstants from '../../static/FrameworkConstants';
+import { herokuappLoginData } from '../../resources/logindata';
 import { browser} from '@wdio/globals';
 import { getValue } from "@wdio/shared-store-service";
 const loginPage = new LoginPage()

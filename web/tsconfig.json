@@ -23,7 +23,8 @@
   "include": [
     "./**/*.e2e.ts",
     "./**/*.ts",
-    "./jas_e2e/smoke.e2e.ts",
+    "./jas_e2e/smoke/*.e2e.ts",
+    "./jas_e2e/regression/*.e2e.ts",
     "./*.ts",
     "./**/*.ts",
     "./wdio.conf.ts",

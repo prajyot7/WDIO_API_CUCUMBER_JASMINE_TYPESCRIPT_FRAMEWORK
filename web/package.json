@@ -13,6 +13,8 @@
     "wdio:test": " npm run pretest && npm run wdio:run",
     "wdio:test_with_params": " npm run pretest && npm run wido_with_params",
     "wdio:run": "wdio run ./wdio.conf.ts",
+    "jas_smoke": "npx wdio ./wdio.conf.ts --suite smoke",
+    "jas_regression": "npx wdio ./wdio.conf.ts --suite regression",
     "smoke": "npx wdio ./wdio.conf.e2e.ts --suite smoke",
     "regression": "npx wdio ./wdio.conf.e2e.ts --suite regression",
     "wido_with_params": "npx cross-env hostname=https://the-internet.herokuapp.com url=/login wdio run wdio.conf.ts",

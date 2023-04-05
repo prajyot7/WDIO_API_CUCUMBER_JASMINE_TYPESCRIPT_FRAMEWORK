@@ -10,6 +10,12 @@ export class LoginPage{
         await browser.url(hostname + url);
         // await browser.url('https://the-internet.herokuapp.com/login')
     }
+    async launchBrowser(url){
+        await browser.maximizeWindow();
+        console.log('url : '+ url)
+        await browser.url(url);
+        // await browser.url('https://the-internet.herokuapp.com/login')
+    }
 
     async login(username: string, password: string) {
         let hostname = await (await getValue('hostname')).toString();

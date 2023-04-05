@@ -13,12 +13,16 @@ export const config: WebdriverIO.Config = {
         }
     },
     specs: [
-        './jas_e2e/smoke.e2e.ts',
+        './jas_e2e/**/*.e2e.ts'
     ],
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
     ],
+    suites:{
+        smoke: ['./jas_e2e/smoke/smoke.e2e.ts'],
+        regression: ['./jas_e2e/regression/orangehrm.e2e.ts']
+    },
     maxInstances: 1,
     capabilities: [{
         maxInstances: 1,
@@ -68,8 +72,8 @@ export const config: WebdriverIO.Config = {
         await setValue('defautDebounceTimeout', defautDebounceTimeout)
         // await browser.maximizeWindow();
         // enableThrottling(true);
-        let loginPage = new LoginPage();
-        await loginPage.login(herokuappLoginData.validUserName, herokuappLoginData.validPassword())
+        // let loginPage = new LoginPage();
+        // await loginPage.login(herokuappLoginData.validUserName, herokuappLoginData.validPassword())
         
     }
 }
