@@ -57,6 +57,11 @@ export const config: WebdriverIO.Config = {
             // do something
         }
     },
+    afterTest: async function (test, context, result) {
+        if (!result.passed) {
+            await browser.takeScreenshot();
+          }
+    },
     onPrepare: async function () {
     },
     before: async function () {

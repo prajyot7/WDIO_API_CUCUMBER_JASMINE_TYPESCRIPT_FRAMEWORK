@@ -24,4 +24,10 @@ describe('Login feature', () => {
         expect(await (await loginPage.getflashAlert()).isExisting()).toBe(true);
         expect(await loginPage.getflashAlertTextValue(await loginPage.getflashErrorAlert(FrameworkConstants.LOGIN_FAILED_UserMSG))).toContain(FrameworkConstants.LOGIN_FAILED_UserMSG);
     });
+    it("verify invalid username error message", async () => {
+        await loginPage.login('abcdd', herokuappLoginData.validPassword())
+        await (await loginPage.getflashAlert()).waitForDisplayed({timeout: Number(await getValue('dialogWaitTimeout'))})
+        expect(await (await loginPage.getflashAlert()).isExisting()).toBe(true);
+        expect(await loginPage.getflashAlertTextValue(await loginPage.getflashErrorAlert(FrameworkConstants.LOGIN_FAILED_UserMSG))).toContain("You username is invalid!");
+    });
 });
