@@ -1,6 +1,6 @@
 import type { Options } from '@wdio/types'
 import { setValue } from '@wdio/shared-store-service';
-import { LoginPage } from './page-objects/login.page';
+import { LoginPage } from '../web/jas_e2e/page-objects/login.page';
 import { herokuappLoginData } from './resources/logindata';
 var path = require('path');
 export const config: WebdriverIO.Config = {

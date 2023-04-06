@@ -1,8 +1,8 @@
 Feature: Wait types demo
 
     Scenario: Test different wait types
-        Given I am on dynamic loading <AppURL> page
-        When I click on start button
+        Given user is on dynamic loading <AppURL> page
+        When click on start button
         Then I validate loading icon
 
         Examples:

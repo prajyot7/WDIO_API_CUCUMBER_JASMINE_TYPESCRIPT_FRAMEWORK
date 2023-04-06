@@ -1,5 +1,5 @@
 import { getValue } from "@wdio/shared-store-service";
-import { OrangeHRMPage } from '../../page-objects/orangehrm.page'
+import { OrangeHRMPage } from '../page-objects/orangehrm.page'
 const orangeHrmPage = new OrangeHRMPage()
 describe('Orange HRM feature', () => {
 

@@ -1,4 +1,4 @@
-import CommonActions from "../utils/common.actions"
+import CommonActions from "../../utils/common.actions"
 
 export class WaitEx {
 

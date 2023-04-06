@@ -23,8 +23,6 @@
   "include": [
     "./**/*.e2e.ts",
     "./**/*.ts",
-    "./jas_e2e/smoke/*.e2e.ts",
-    "./jas_e2e/regression/*.e2e.ts",
     "./*.ts",
     "./**/*.ts",
     "./wdio.conf.ts",
@@ -35,6 +33,9 @@
     "./cucumber/feature/**/*.feature",
     "./cucumber/**/**/*.ts",
     "./**/**/*.ts",
+    "./jas_e2e/**/*.e2e.ts",
+    "./cucumber/**/*.ts",
+    "./web/resources/*.json"
   ],
   "exclude": [
     "node_modules",

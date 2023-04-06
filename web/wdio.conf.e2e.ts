@@ -170,7 +170,7 @@ export const config: WebdriverIO.Config = {
             'allure',
             {
                 outputDir: 'logs/results/allure-results',
-                disableWebdriverStepsReporting: true,
+                disableWebdriverStepsReporting: false,
                 disableWebdriverScreenshotsReporting: false,
                 useCucumberStepReporter: true
             }
@@ -386,5 +386,10 @@ export const config: WebdriverIO.Config = {
         // let loginPage = new LoginPage();
         // await loginPage.login(herokuappLoginData.validUserName, herokuappLoginData.validPassword())
         
-    }    
+    },
+    afterStep: async function (step, scenario, { error, duration, passed }, context) {
+        if (error) {
+          browser.saveScreenshot('./logs/results/allure-results/afterStepScreenshot.png');
+        }
+      },    
 }

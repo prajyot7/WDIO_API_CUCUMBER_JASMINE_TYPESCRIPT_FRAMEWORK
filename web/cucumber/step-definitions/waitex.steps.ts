@@ -1,15 +1,15 @@
 import { Given, When, Then } from '@cucumber/cucumber'
-import { LoginPage } from '../../page-objects/login.page';
-import {WaitEx} from "../../page-objects/waitex.page"
+import { LoginPage } from '../../cucumber/page-objects/login.page';
+import {WaitEx} from "../../cucumber/page-objects/waitex.page"
 import CommonActions from '../../utils/common.actions';
 let waitexPage =new WaitEx();
-Given(/^I am on dynamic loading (.+) page$/, async (appurl: string) => {
+Given(/^user is on dynamic loading (.+) page$/, async (appurl: string) => {
     CommonActions.addLog("Maximizing window")
     await browser.url(appurl)
     CommonActions.addLog(`Loading URL: ${appurl}`)
 });
 
-When(/^I click on start button$/, async () => {
+When(/^click on start button$/, async () => {
     await waitexPage.clickOnStartButton()
 });
 

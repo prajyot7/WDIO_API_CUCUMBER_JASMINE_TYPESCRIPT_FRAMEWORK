@@ -1,10 +1,11 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
-import {LoginPage} from '../../page-objects/login.page';
+import {LoginPage} from '../../cucumber/page-objects/login.page';
 import CommonActions from '../../utils/common.actions';
+import { getValue } from '@wdio/shared-store-service';
 const loginPage = new LoginPage();
 
 
-Given(/^I am on the (\w+) page$/, async (page) => {
+Given(/^user is on the (\w+) page$/, async (page) => {
     await loginPage.openBrowser()
 });
 Given(/^I open the browser and load the url (.+)$/, async (homepageurl: string) => {
@@ -14,11 +15,11 @@ Given(/^I open the browser and load the url (.+)$/, async (homepageurl: string) 
     await browser.maximizeWindow()
     CommonActions.addLog("Maximizing window")
 });
-When(/^I login with (\w+) and (.+)$/, async (username, password) => {
+When(/^enter (\w+) and (.+)$/, async (username, password) => {
     await loginPage.login(username, password)
 });
 
-Then(/^I should see a flash message saying (.*)$/, async (message) => {
+Then(/^validate flash message (.*)$/, async (message) => {
     expect(await (await loginPage.getflashAlert()).isExisting()).toBe(true);
     expect(await loginPage.getflashAlertText()).toContain(message);
 });

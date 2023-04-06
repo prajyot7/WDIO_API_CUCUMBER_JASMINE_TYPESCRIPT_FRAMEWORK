@@ -1,4 +1,6 @@
-const fs =require('fs');
+import path from "path";
+
+const fs = require('fs');
 let zipper = require('zip-local');
 export class FileUtils{
     async deleteDirectory(path: string){
@@ -20,5 +22,9 @@ export const zipFolder = (sourceFolder: string, targetFolder: string) => {
 }
 
 export const parseJsonFile = (filepath: string) => {
-    return JSON.parse(fs.readFileSync(filepath, "utf-8"))
+    const directory = path.join('web/resources/', filepath)
+    const jsonData = fs.readFileSync(directory)
+    let  eshop = JSON.parse(jsonData)
+    console.log('eshop data from json file: ',eshop);
+    return eshop
 }
